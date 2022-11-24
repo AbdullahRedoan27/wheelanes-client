@@ -3,7 +3,7 @@ import React from 'react';
 const Loading = () => {
     return (
         <div>
-            <button className="btn loading flex justify-center w-24"></button>
+            <button className="btn btn-primary btn-circle text-error loading flex justify-center mx-auto"></button>
         </div>
     );
 };

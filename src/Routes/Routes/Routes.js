@@ -6,6 +6,9 @@ import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard"
 import Home from "../../Pages/Home/Home"
 import Login from "../../Pages/Login/Login"
 import Register from "../../Pages/Register/Register"
+import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts"
+import ProductDetails from "../../Pages/ProductDetails/ProductDetails"
+import { async } from "@firebase/util"
 
 const router = createBrowserRouter([
     {
@@ -35,8 +38,17 @@ const router = createBrowserRouter([
                 element:<Dashboard></Dashboard>
             },
             {
-                path:'/dashboard/addproduct',
+                path:'/dashboard/sellCar',
                 element:<SellACar></SellACar>
+            },
+            {
+                path:'/dashboard/myProducts',
+                element:<MyProducts></MyProducts>
+            },
+            {
+                path:'/dashboard/productDetails/:id',
+                element:<ProductDetails></ProductDetails>,
+                loader: ({params})=> fetch(`http://localhost:5000/dashboard/productDetails/${params.id}`)
             }
         ]
     }

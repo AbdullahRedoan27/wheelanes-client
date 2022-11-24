@@ -5,7 +5,7 @@ import Loading from "../../../Components/Loading/Loading";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const SellACar = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState();
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const {
@@ -88,8 +88,8 @@ const SellACar = () => {
               if(data.acknowledged){
                 toast.success('Your car has been published for sale')
               }
-              reset()
               setLoading(false)
+              reset()
             });
           }
         });
