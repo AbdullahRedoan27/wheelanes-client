@@ -29,7 +29,7 @@ const Register = () => {
         const formData = new FormData();
         formData.append('image', image);
         const imgbbKey = process.env.REACT_APP_imgbb_Key;
-        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgbbKey}`
+        const url = `https://api.imgbb.com/1/upload?key=${imgbbKey}`
         fetch(url, {
             method:'POST',
             body: formData
@@ -38,10 +38,11 @@ const Register = () => {
         .then(data => {
             if(data.success){
                 const image = data.data.url;
+                console.log(data);
                 const user = {
                     name: name,
                     email: email,
-                    image: image,
+                    photo: image,
                     role: role,
                 }
 
@@ -51,7 +52,7 @@ const Register = () => {
                 }
 
                 updateUserProfile(profile)
-                .then(res => console.log(res))
+                .then(() => {})
                 .catch(err => console.error(err))
 
                 fetch('http://localhost:5000/users', {

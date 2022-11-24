@@ -7,10 +7,16 @@ const Navbar = () => {
   const menuItems = (
     <div className="flex flex-col lg:flex-row text-white">
       <li>
-        <Link to='/login'>Login</Link>
+        <Link to='/'>Home</Link>
       </li>
       <li>
-        <Link>Item 3</Link>
+        <Link to='/products'>Products</Link>
+      </li>
+      <li>
+        <Link to='/dashboard'>Dashboard</Link>
+      </li>
+      <li>
+        <Link>Blogs</Link>
       </li>
     </div>
   );
@@ -49,7 +55,7 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link className="btn btn-ghost normal-case text-white text-2xl">Wheelanes</Link>
+          <Link to='/' className="btn btn-ghost normal-case text-white text-2xl">Wheelanes</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
@@ -57,7 +63,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {user?.uid && user?.photoURL ?
+          {user?.uid || user?.photoURL ?
               <>
                 <img src={user?.photoURL} alt="" className="border border-gray-400 w-10 rounded-full mr-4"></img>
                 <Link onClick={handleLogOut} className="btn">Log Out</Link>
