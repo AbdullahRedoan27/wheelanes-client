@@ -5,15 +5,25 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const Register = () => {
-    const {createUser} = useContext(AuthContext)
+    const {createUser, updateUserProfile} = useContext(AuthContext)
     const { register, formState:{errors}, handleSubmit } = useForm();
 
     const handleRegister = data => {
-        console.log(data);
         const name = data.name;
         const email = data.email;
         const password = data.password;
         const role = data.role;
+
+        createUser(email, password)
+        .then(res => {
+            const user = res.user;
+            console.log(user);
+            toast.success('Successfully Registered')
+        })
+        .catch(err => {
+            console.error(err)
+            toast.error(err.message)
+        })
 
         const image = data.image[0];
         const formData = new FormData();
@@ -34,18 +44,28 @@ const Register = () => {
                     image: image,
                     role: role,
                 }
-            }
-        })
 
-        createUser(email, password)
-        .then(res => {
-            const user = res.user;
-            console.log(user);
-            toast.success('Successfully Registered')
-        })
-        .catch(err => {
-            console.error(err)
-            toast.error(err.message)
+                const profile = {
+                    displayName: name,
+                    photoURL: image
+                }
+
+                updateUserProfile(profile)
+                .then(res => console.log(res))
+                .catch(err => console.error(err))
+
+                fetch('http://localhost:5000/users', {
+                    method:'POST', 
+                    headers: {
+                        'content-type':'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                })
+            }
         })
     }
     return (
