@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";

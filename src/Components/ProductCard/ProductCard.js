@@ -36,6 +36,7 @@ const ProductCard = ({ product }) => {
         {product?.location}
       </td>
       <td className="text-sm py-2 p-0">
+        Quality: {product?.quality}<br />
         {product?.status}
       </td>
       <th className="p-0">

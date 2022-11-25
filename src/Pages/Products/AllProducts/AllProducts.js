@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useLoaderData } from "react-router-dom";
 import CategoryCard from "../../../Components/CategoryCard/CategoryCard";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 

@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -16,7 +15,7 @@ const Categories = () => {
     })
 
     return (
-            <div className='grid lg:grid-cols-4 items-center lg:h-[500px] w-11/12 mx-auto'>
+            <div className='grid lg:grid-cols-4 items-center lg:h-screen w-11/12 mx-auto'>
             {
                 categories?.map(category => <CategoryCard
                     key={category._id}
