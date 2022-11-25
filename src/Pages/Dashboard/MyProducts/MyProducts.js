@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import ProductCard from '../../../Components/ProductCard/ProductCard';
 import { AuthContext } from '../../../Context/AuthProvider';
+import MyProductCard from '../MyProductCard/MyProductCard';
 
 const MyProducts = () => {
     const {user} = useContext(AuthContext);
@@ -13,11 +13,10 @@ const MyProducts = () => {
             return data;
         }
     })
-    console.log(products);
 
     return (
-        <div>
-            <div className="overflow-x-auto w-full">
+        <div className='w-11/12 mx-auto'>
+        <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
             <tr>
@@ -25,15 +24,17 @@ const MyProducts = () => {
               <th>Seller</th>
               <th>Category & Location</th>
               <th>Details</th>
-              <th></th>
+              <th>Delete</th>
+              <th>Edit</th>
+              <th>Change Status</th>
             </tr>
           </thead>
           <tbody>
             {
-                products.map(product => <ProductCard
+                products.map(product => <MyProductCard
                     key={product?._id}
                     product={product}
-                ></ProductCard>)
+                ></MyProductCard>)
             }
           </tbody>
         </table>

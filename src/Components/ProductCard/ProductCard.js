@@ -4,10 +4,9 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
   return (
-    <tr>
-      <td>
+    <tr className="">
+      <td className="p-0">
         <div className="flex items-center space-x-3">
           <div className="avatar">
             <div className="mask mask-squircle w-24 h-24">
@@ -24,20 +23,23 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </td>
-      <td>
+      <td className="p-0 py-4">
         <img src={product?.sellerImage} className="w-8 ml-5 rounded-full" alt=""></img>{product?.sellername}
         <br />
         <span className="badge badge-ghost badge-sm">
           {product?.sellerEmail}
         </span>
       </td>
-      <td className="text-sm">
+      <td className="text-sm py-2 p-0">
         Category: <span className="font-semibold">{product?.category}</span>
         <br />
         {product?.location}
       </td>
-      <th>
-        <Link to={`/dashboard/productDetails/${product?._id}`} className="btn btn-ghost btn-xs">details</Link>
+      <td className="text-sm py-2 p-0">
+        {product?.status}
+      </td>
+      <th className="p-0">
+        <Link to={`/dashboard/productDetails/${product?._id}`} className="btn btn-accent btn-xs">details</Link>
       </th>
     </tr>
   );

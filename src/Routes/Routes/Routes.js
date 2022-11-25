@@ -8,7 +8,11 @@ import Login from "../../Pages/Login/Login"
 import Register from "../../Pages/Register/Register"
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts"
 import ProductDetails from "../../Pages/ProductDetails/ProductDetails"
+import EditProduct from "../../Pages/EditProduct/EditProduct"
+import Products from "../../Pages/Products/Products/Products"
+import Categories from "../../Pages/Categories/Categories"
 import { async } from "@firebase/util"
+import AllProducts from "../../Pages/Products/AllProducts/AllProducts"
 
 const router = createBrowserRouter([
     {
@@ -26,6 +30,19 @@ const router = createBrowserRouter([
             {
                 path:'/register',
                 element:<Register></Register>
+            }, 
+            {
+                path:'/products',
+                element: <Categories></Categories>
+            },
+            {
+                path:'/products/:category',
+                element:<Products></Products>,
+                loader: async({params}) => await fetch(`http://localhost:5000/products/${params.category}`)
+            },
+            {
+                path:'/products/allProducts',
+                element:<AllProducts></AllProducts>
             }
         ]
     },
@@ -49,6 +66,11 @@ const router = createBrowserRouter([
                 path:'/dashboard/productDetails/:id',
                 element:<ProductDetails></ProductDetails>,
                 loader: ({params})=> fetch(`http://localhost:5000/dashboard/productDetails/${params.id}`)
+            },
+            {
+                path:'/dashboard/productDetails/editProduct/:id',
+                element:<EditProduct></EditProduct>,
+                loader: ({params})=> fetch(`http://localhost:5000/dashboard/productDetails/editProduct/${params.id}`)
             }
         ]
     }
