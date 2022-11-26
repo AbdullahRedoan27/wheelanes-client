@@ -1,21 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import CategoryCard from "../../../Components/CategoryCard/CategoryCard";
+import Loading from "../../../Components/Loading/Loading";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 
 const Products = () => {
     const products = useLoaderData()
-    console.log(products)
-
+  const [loading, setLoading] = useState(true)
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
+      setLoading(true)
       const res = await fetch("http://localhost:5000/categories");
       const data = res.json();
+      setLoading(false)
       return data;
     },
   });
+
+  if(loading){
+    return <Loading></Loading>
+  }
 
   return (
     <div className="grid grid-cols-5">

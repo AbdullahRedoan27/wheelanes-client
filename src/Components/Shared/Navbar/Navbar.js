@@ -1,33 +1,89 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
+import Loading from "../../Loading/Loading";
 
 const Navbar = () => {
-  const {user, logOut} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
+
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`http://localhost:5000/users?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+        setLoading(false);
+      });
+  }, [user?.email]);
+
   const menuItems = (
     <div className="flex flex-col lg:flex-row text-white lg:items-center">
       <li>
-        <Link to='/'>Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to='/products'>Products</Link>
+        <Link to="/products">Products</Link>
       </li>
-      <ul tabIndex={0} className="menu menu-compact menu-horizontal dropdown-content p-2">
+      <ul
+        tabIndex={0}
+        className="menu menu-compact menu-horizontal dropdown-content p-2"
+      >
         <li tabIndex={0}>
           <Link className="">
             Dashboard
-            <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            <svg
+              className="fill-current"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+            </svg>
           </Link>
           <ul className="bg-base-200 rounded-b-xl p-3">
-          <li><Link to='/dashboard/sellCar'>Sell A Car</Link></li>
-            <li><Link to='/dashboard/myProducts'>My Products</Link></li>
-            <li><Link to='/dashboard/myProducts'>My Buyers</Link></li>
-            <li><Link to='/dashboard/myProducts'>My Orders</Link></li>
-            <li><Link to='/dashboard/allseller'>All Seller</Link></li>
-            <li><Link to='/dashboard/allbuyer'>All Buyer</Link></li>
-            <li><Link to='/dashboard/alluser'>All User</Link></li>
-            <li><Link to='/dashboard/alluser'>Reported Items</Link></li>
-
+            {userData?.role === "Seller" && (
+              <>
+                <li>
+                  <Link to="/dashboard/sellCar">Sell A Car</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/myProducts">My Products</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/myProducts">My Buyers</Link>
+                </li>
+              </>
+            )}
+            {userData?.role === "Buyer/User" && (
+              <>
+                <li>
+                  <Link to="/dashboard/myProducts">My Orders</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/myProducts">My Wishlist</Link>
+                </li>
+              </>
+            )}
+            {userData?.role === "Admin" && (
+              <>
+                <li>
+                  <Link to="/dashboard/allseller">All Seller</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/allbuyer">All Buyer</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/alluser">All User</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/alluser">Reported Items</Link>
+                </li>
+              </>
+            )}
           </ul>
         </li>
       </ul>
@@ -39,9 +95,9 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut()
-    .then(() => {})
-    .catch(err => console.error(err))
-  }
+      .then(() => {})
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="text-primary relative z-10">
@@ -71,22 +127,33 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-white text-2xl">Wheelanes</Link>
+          <Link
+            to="/"
+            className="btn btn-ghost normal-case text-white text-2xl"
+          >
+            Wheelanes
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">
-              {menuItems}
-          </ul>
+          <ul className="menu menu-horizontal p-0">{menuItems}</ul>
         </div>
         <div className="navbar-end">
-          {user?.uid || user?.photoURL ?
-              <>
-                <img src={user?.photoURL} alt="" className="border border-gray-400 w-10 rounded-full mr-4"></img>
-                <Link onClick={handleLogOut} className="btn">Log Out</Link>
-              </>
-            :
-              <Link to='/login' className="btn">Login</Link>
-          }
+          {user?.uid || user?.photoURL ? (
+            <>
+              <img
+                src={user?.photoURL}
+                alt=""
+                className="border border-gray-400 w-10 rounded-full mr-4"
+              ></img>
+              <Link onClick={handleLogOut} className="btn">
+                Log Out
+              </Link>
+            </>
+          ) : (
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

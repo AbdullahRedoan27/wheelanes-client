@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserCard from "../UserCard/UserCard";
+import Loading from "../../../../Components/Loading/Loading";
 
 const AllUsers = () => {
     const [reFetch, setRefetch] = useState(false);
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true)
     axios
       .get("http://localhost:5000/alluser")
-      .then((res) => setUsers(res.data));
+      .then((res) => {
+        setUsers(res.data)
+        setLoading(false)
+    });
   }, [reFetch]);
-  console.log(users);
+
+  if(loading){
+    return <Loading></Loading>
+  }
+
   return (
     <div>
       <div className="overflow-x-auto w-full">

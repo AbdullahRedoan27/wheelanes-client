@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import {GoogleAuthProvider} from 'firebase/auth';
+import Loading from "../../Components/Loading/Loading";
 
 const Login = () => {
+  const [loading, setLoading] = useState(true)
     const {googleSignIn } = useContext(AuthContext);
     const { register, formState:{errors}, handleSubmit } = useForm();
     const {signIn} = useContext(AuthContext);
@@ -14,15 +16,17 @@ const Login = () => {
     const handleSignIn = data => {
         const email = data.email;
         const password = data.password;
+        setLoading(true);
         signIn(email, password)
         .then(res => {
             const user = res.user;
-            console.log(user);
+            setLoading(false)
             toast.success('Logged In Successfully')
             navigate('/')
         })
         .catch(err =>{
             console.error(err);
+            setLoading(false)
             toast.error(err.message);
         });
     }
@@ -36,6 +40,11 @@ const Login = () => {
             console.log(user);
         })
     }
+
+    if(loading){
+      return <Loading></Loading>
+    }
+
   return (
     <div className="h-[500px] mt-10 flex justify-center items-center">
       <div className="w-96 p-8">
