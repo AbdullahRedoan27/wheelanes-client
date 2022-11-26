@@ -1,22 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
+import axios from 'axios';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
-  const email = user?.email;
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/users?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setUserData(data);
-        setLoading(false);
-      });
+    axios
+    .get(`http://localhost:5000/users?email=${user?.email}`)
+    .then(function(response){
+      setUserData(response.data);
+      setLoading(false)
+    })
   }, [user?.email]);
 
   const menuItems = (
@@ -85,7 +84,7 @@ const Navbar = () => {
                   <Link to="/dashboard/alluser">All User</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/alluser">Reported Items</Link>
+                  <Link to="/dashboard/reportedItems">Reported Items</Link>
                 </li>
               </>
             )}

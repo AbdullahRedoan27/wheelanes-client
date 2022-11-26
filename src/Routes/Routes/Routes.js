@@ -16,6 +16,7 @@ import AllUsers from "../../Pages/Dashboard/AdminDashboard/AllUsers/AllUsers";
 import AllSeller from "../../Pages/Dashboard/AdminDashboard/AllSeller/AllSeller";
 import AllBuyer from "../../Pages/Dashboard/AdminDashboard/AllBuyer/AllBuyer";
 import NotFoundPage from "../../Pages/NotFoundPage/NotFoundPage";
+import ReportedItems from "../../Pages/Dashboard/AdminDashboard/ReportedItems/ReportedItems";
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
         path: "/dashboard/allbuyer",
         element: <AllBuyer></AllBuyer>,
       },
+      {
+        path:'/dashboard/reportedItems',
+        element:<ReportedItems></ReportedItems>
+      }
     ],
   },
 ]);

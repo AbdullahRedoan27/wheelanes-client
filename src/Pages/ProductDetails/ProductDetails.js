@@ -8,16 +8,14 @@ const ProductDetails = () => {
   const product = useLoaderData();
   const { user } = useContext(AuthContext);
   const [reporter, setReporter] = useState(null);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const email = user?.email;
 
   useEffect(() => {
-    setLoading(true);
     fetch(`http://localhost:5000/users?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
         setReporter(data);
-        setLoading(false);
       });
   }, [email]);
 
@@ -34,6 +32,7 @@ const ProductDetails = () => {
     };
 
     if (proceed) {
+      setLoading(true);
       fetch("http://localhost:5000/reportProduct", {
         method: "POST",
         headers: {
@@ -41,8 +40,14 @@ const ProductDetails = () => {
         },
         body: JSON.stringify(reportedProduct),
       })
-        .then((data) => console.log(data))
-        .catch((err) => console.error(err));
+        .then((data) => {
+          console.log(data)
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error(err)
+          setLoading(false);
+        });
     }
   };
 
