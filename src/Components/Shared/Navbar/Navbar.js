@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
-import axios from 'axios';
+import axios from "axios";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -11,15 +11,15 @@ const Navbar = () => {
   useEffect(() => {
     setLoading(true);
     axios
-    .get(`http://localhost:5000/users?email=${user?.email}`)
-    .then(function(response){
-      setUserData(response.data);
-      setLoading(false)
-    })
+      .get(`http://localhost:5000/users?email=${user?.email}`)
+      .then(function (response) {
+        setUserData(response.data);
+        setLoading(false);
+      });
   }, [user?.email]);
 
   const menuItems = (
-    <div className="flex flex-col lg:flex-row text-white lg:items-center">
+    <ul className="flex flex-col bg-base-100 rounded-box lg:flex-row text-white lg:items-center">
       <li>
         <Link to="/">Home</Link>
       </li>
@@ -29,70 +29,71 @@ const Navbar = () => {
       <li>
         <Link>Blogs</Link>
       </li>
-      {
-        user?.uid &&
-        <ul
-        tabIndex={0}
-        className="menu menu-compact menu-horizontal dropdown-content p-2"
-      >
-        <li tabIndex={0}>
-          <Link className="">
-            Dashboard
-            <svg
-              className="fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-            </svg>
-          </Link>
-          <ul className="bg-base-200 rounded-b-xl p-3">
-            {userData?.role === "Seller" && (
-              <>
-                <li>
-                  <Link to="/dashboard/sellCar">Sell A Car</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard/myProducts">My Products</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard/myProducts">My Buyers</Link>
-                </li>
-              </>
-            )}
-            {userData?.role === "Buyer/User" && (
-              <>
-                <li>
-                  <Link to="/dashboard/myProducts">My Orders</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard/myProducts">My Wishlist</Link>
-                </li>
-              </>
-            )}
-            {userData?.role === "Admin" && (
-              <>
-                <li>
-                  <Link to="/dashboard/allseller">All Seller</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard/allbuyer">All Buyer</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard/alluser">All User</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard/reportedItems">Reported Items</Link>
-                </li>
-              </>
-            )}
+      <li className="h-14 p-0 m-0">
+        {user?.uid && (
+          <ul
+            tabIndex={0}
+            className="menu menu-compact menu-horizontal dropdown-content p-2"
+          >
+            <li tabIndex={0}>
+              <Link className="">
+                Dashboard
+                <svg
+                  className="fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                </svg>
+              </Link>
+              <ul className="bg-base-200 rounded-b-xl p-3">
+                {userData?.role === "Seller" && (
+                  <>
+                    <li>
+                      <Link to="/dashboard/sellCar">Sell A Car</Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/myProducts">My Products</Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/myProducts">My Buyers</Link>
+                    </li>
+                  </>
+                )}
+                {userData?.role === "Buyer/User" && (
+                  <>
+                    <li>
+                      <Link to="/dashboard/myProducts">My Orders</Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/myProducts">My Wishlist</Link>
+                    </li>
+                  </>
+                )}
+                {userData?.role === "Admin" && (
+                  <>
+                    <li>
+                      <Link to="/dashboard/allseller">All Seller</Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/allbuyer">All Buyer</Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/alluser">All User</Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/reportedItems">Reported Items</Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </li>
           </ul>
-        </li>
-      </ul>
-      }
-    </div>
+        )}
+      </li>
+    </ul>
   );
 
   const handleLogOut = () => {
@@ -122,12 +123,12 @@ const Navbar = () => {
                 />
               </svg>
             </label>
-            <ul
+            <div
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow w-52"
             >
               {menuItems}
-            </ul>
+            </div>
           </div>
           <Link
             to="/"
@@ -137,7 +138,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">{menuItems}</ul>
+          <ul className="menu menu-horizontal p-0">
+            {menuItems}
+          </ul>
         </div>
         <div className="navbar-end">
           {user?.uid || user?.photoURL ? (
