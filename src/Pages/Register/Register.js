@@ -6,7 +6,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 const Register = () => {
     const {createUser, updateUserProfile} = useContext(AuthContext)
-    const { register, formState:{errors}, handleSubmit } = useForm();
+    const { register, formState:{errors}, handleSubmit, reset } = useForm();
 
     const handleRegister = data => {
         const name = data.name;
@@ -19,6 +19,7 @@ const Register = () => {
             const user = res.user;
             console.log(user);
             toast.success('Successfully Registered')
+            reset()
         })
         .catch(err => {
             console.error(err)
@@ -70,7 +71,7 @@ const Register = () => {
         })
     }
     return (
-        <div className="h-[500px] flex justify-center items-center">
+        <div className="h-[500px] mt-10 flex justify-center items-center">
       <div className="w-96 p-8">
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="form-control w-full">

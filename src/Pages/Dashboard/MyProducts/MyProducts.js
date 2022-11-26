@@ -27,6 +27,7 @@ const MyProducts = () => {
               <th>Delete</th>
               <th>Edit</th>
               <th>Change Status</th>
+              <th>Advertise</th>
             </tr>
           </thead>
           <tbody>

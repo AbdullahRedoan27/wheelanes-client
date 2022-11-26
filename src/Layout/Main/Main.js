@@ -6,7 +6,7 @@ import '../../Pages/Home/Banner/Banner.css';
 
 const Main = () => {
     return (
-        <div className='banner'>
+        <div>
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>

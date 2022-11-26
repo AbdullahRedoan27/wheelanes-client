@@ -11,8 +11,11 @@ import ProductDetails from "../../Pages/ProductDetails/ProductDetails"
 import EditProduct from "../../Pages/EditProduct/EditProduct"
 import Products from "../../Pages/Products/Products/Products"
 import Categories from "../../Pages/Categories/Categories"
-import { async } from "@firebase/util"
 import AllProducts from "../../Pages/Products/AllProducts/AllProducts"
+import AllUsers from "../../Pages/Dashboard/AdminDashboard/AllUsers/AllUsers"
+import AllSeller from "../../Pages/Dashboard/AdminDashboard/AllSeller/AllSeller"
+import AllBuyer from "../../Pages/Dashboard/AdminDashboard/AllBuyer/AllBuyer"
+import NotFoundPage from "../../Pages/NotFoundPage/NotFoundPage"
 
 const router = createBrowserRouter([
     {
@@ -43,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path:'/products/allProducts',
                 element:<AllProducts></AllProducts>
+            },
+            {
+                path:'*',
+                element: <NotFoundPage></NotFoundPage>
             }
         ]
     },
@@ -71,6 +78,18 @@ const router = createBrowserRouter([
                 path:'/dashboard/productDetails/editProduct/:id',
                 element:<EditProduct></EditProduct>,
                 loader: ({params})=> fetch(`http://localhost:5000/dashboard/productDetails/editProduct/${params.id}`)
+            },
+            {
+                path:'/dashboard/alluser',
+                element:<AllUsers></AllUsers>
+            },
+            {
+                path:'/dashboard/allseller',
+                element:<AllSeller></AllSeller>
+            },
+            {
+                path:'/dashboard/allbuyer',
+                element:<AllBuyer></AllBuyer>
             }
         ]
     }

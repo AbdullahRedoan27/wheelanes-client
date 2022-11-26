@@ -1,10 +1,12 @@
 import React from "react";
 import './Banner.css'
+import './banner2.css'
+import bg from '../../../images/Background.png';
 const Banner = () => {
   return (
     <div>
       <div
-        className="hero min-h-screen"
+        className="hero min-h-screen bannerr"
       >
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">

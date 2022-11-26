@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../../Components/Loading/Loading";
 import { AuthContext } from "../../../Context/AuthProvider";
 
@@ -16,6 +17,7 @@ const SellACar = () => {
   } = useForm();
   const [usingPeriod, setUsingPeriod] = useState();
   const [seller, setSeller] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLoading(true);
@@ -87,6 +89,7 @@ const SellACar = () => {
               console.log(data)
               if(data.acknowledged){
                 toast.success('Your car has been published for sale')
+                navigate('/dashboard/myProducts')
               }
               setLoading(false)
               reset()

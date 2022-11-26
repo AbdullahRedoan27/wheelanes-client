@@ -75,6 +75,9 @@ const MyProductCard = ({ product }) => {
             <option>Sold</option>
         </select>
       </th>
+      <th className="p-0">
+        <Link to={`/dashboard/productDetails/advertise/${product?._id}`} disabled={product?.status === 'Sold'} className="btn btn-warning btn-xs">Advertise</Link>
+      </th>
     </tr>
   );
 };

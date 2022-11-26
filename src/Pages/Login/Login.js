@@ -37,7 +37,7 @@ const Login = () => {
         })
     }
   return (
-    <div className="h-[500px] flex justify-center items-center">
+    <div className="h-[500px] mt-10 flex justify-center items-center">
       <div className="w-96 p-8">
         <form onSubmit={handleSubmit(handleSignIn)}>
           <div className="form-control w-full">

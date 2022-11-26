@@ -19,8 +19,15 @@ const Navbar = () => {
             <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
           </Link>
           <ul className="bg-base-200 rounded-b-xl p-3">
-            <li><Link to='/dashboard/sellCar'>Sell A Car</Link></li>
+          <li><Link to='/dashboard/sellCar'>Sell A Car</Link></li>
             <li><Link to='/dashboard/myProducts'>My Products</Link></li>
+            <li><Link to='/dashboard/myProducts'>My Buyers</Link></li>
+            <li><Link to='/dashboard/myProducts'>My Orders</Link></li>
+            <li><Link to='/dashboard/allseller'>All Seller</Link></li>
+            <li><Link to='/dashboard/allbuyer'>All Buyer</Link></li>
+            <li><Link to='/dashboard/alluser'>All User</Link></li>
+            <li><Link to='/dashboard/alluser'>Reported Items</Link></li>
+
           </ul>
         </li>
       </ul>
@@ -37,7 +44,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="text-primary">
+    <div className="text-primary relative z-10">
       <div className="navbar rounded-b-2xl">
         <div className="navbar-start">
           <div className="dropdown">
