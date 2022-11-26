@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import UserCard from '../UserCard/UserCard';
+import Loading from '../../../../Components/Loading/Loading';
 
 const AllSeller = () => {
     const [reFetch, setRefetch] = useState(false);
     const [sellers, setSellerss] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        setLoading(true)
       axios
         .get("http://localhost:5000/allseller")
-        .then((res) => setSellerss(res.data));
+        .then((res) => {
+            setSellerss(res.data)
+            setLoading(false)
+        });
     }, [reFetch]);
+
+    if(loading){
+        return <Loading></Loading>
+      }
 
     return (
         <div>

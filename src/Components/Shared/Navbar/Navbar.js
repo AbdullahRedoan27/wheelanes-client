@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
-import Loading from "../../Loading/Loading";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
-
+  const email = user?.email;
 
   useEffect(() => {
     setLoading(true);
     fetch(`http://localhost:5000/users?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setUserData(data);
         setLoading(false);
       });
@@ -27,7 +27,12 @@ const Navbar = () => {
       <li>
         <Link to="/products">Products</Link>
       </li>
-      <ul
+      <li>
+        <Link>Blogs</Link>
+      </li>
+      {
+        user?.uid &&
+        <ul
         tabIndex={0}
         className="menu menu-compact menu-horizontal dropdown-content p-2"
       >
@@ -87,9 +92,7 @@ const Navbar = () => {
           </ul>
         </li>
       </ul>
-      <li>
-        <Link>Blogs</Link>
-      </li>
+      }
     </div>
   );
 

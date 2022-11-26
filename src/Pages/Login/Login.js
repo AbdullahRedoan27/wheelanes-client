@@ -7,7 +7,7 @@ import {GoogleAuthProvider} from 'firebase/auth';
 import Loading from "../../Components/Loading/Loading";
 
 const Login = () => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
     const {googleSignIn } = useContext(AuthContext);
     const { register, formState:{errors}, handleSubmit } = useForm();
     const {signIn} = useContext(AuthContext);

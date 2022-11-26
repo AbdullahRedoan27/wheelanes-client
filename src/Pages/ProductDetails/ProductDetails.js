@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link, useLoaderData } from "react-router-dom";
+import Loading from "../../Components/Loading/Loading";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const ProductDetails = () => {
   const product = useLoaderData();
-  console.log(product);
+  const { user } = useContext(AuthContext);
+  const [reporter, setReporter] = useState(null);
+  const [loading, setLoading] = useState();
+  const email = user?.email;
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`http://localhost:5000/users?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReporter(data);
+        setLoading(false);
+      });
+  }, [email]);
+
+  const handleReport = () => {
+    const proceed = window.confirm(
+      "Are you sure to report to the admin about this product?"
+    );
+
+    const reportedProduct = {
+      product,
+      reporterName: reporter?.name,
+      reporterEmail: reporter?.email,
+      reporterRole: reporter?.role,
+    };
+
+    if (proceed) {
+      fetch("http://localhost:5000/reportProduct", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(reportedProduct),
+      })
+        .then((data) => console.log(data))
+        .catch((err) => console.error(err));
+    }
+  };
+
   return (
     <div className="w-11/12 mx-auto">
       <div>
@@ -41,14 +82,41 @@ const ProductDetails = () => {
         </div>
         <p>Location: {product?.location}</p>
         <p>
-          {product?.usingPeriod === 'less than a year' && <>{product?.usingPeriodSecondary} {product?.usingPeriodSecondaryUnit} used</>}
-          {product?.usingPeriod === 'more than 10 years' && <>{product?.usingPeriodSecondary} years used</>}
-          {product?.usingPeriod !== 'less than a year' && <>{product?.usingPeriod} {product?.usingPeriod === 1 ? "year" : "years"} used</>}
+          {product?.usingPeriod === "less than a year" && (
+            <>
+              {product?.usingPeriodSecondary}{" "}
+              {product?.usingPeriodSecondaryUnit} used
+            </>
+          )}
+          {product?.usingPeriod === "more than 10 years" && (
+            <>{product?.usingPeriodSecondary} years used</>
+          )}
+          {product?.usingPeriod !== "less than a year" && (
+            <>
+              {product?.usingPeriod}{" "}
+              {product?.usingPeriod === 1 ? "year" : "years"} used
+            </>
+          )}
         </p>
-        <p className="font-semibold text-lg">Original Price: <span>{product?.originalPrice}$</span></p>
-        <p className="font-semibold text-lg">Resale Price: <span>{product?.resalePrice}$</span></p>
+        <p className="font-semibold text-lg">
+          Original Price: <span>{product?.originalPrice}$</span>
+        </p>
+        <p className="font-semibold text-lg">
+          Resale Price: <span>{product?.resalePrice}$</span>
+        </p>
       </div>
-      <Link className="btn btn-primary mx-auto mt-4 ">Contact Seller</Link>
+      {user?.uid ? 
+        <>
+          <Link className="btn btn-primary mx-auto mt-4 mr-4">
+            Contact Seller
+          </Link>
+          <Link onClick={handleReport} className="btn btn-error mx-auto mt-4 ">
+            Report Product
+          </Link>
+        </>
+        :
+        <p className="text-warning">Please log in to contact the seller.</p>
+      }
     </div>
   );
 };

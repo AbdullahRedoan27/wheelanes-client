@@ -40,7 +40,7 @@ const ProductCard = ({ product }) => {
         {product?.status}
       </td>
       <th className="p-0">
-        <Link to={`/dashboard/productDetails/${product?._id}`} className="btn btn-accent btn-xs">details</Link>
+        <Link to={`/dashboard/productDetails/${product._id}`} className="btn btn-accent btn-xs">details</Link>
       </th>
     </tr>
   );
