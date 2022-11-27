@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const EditProduct = () => {
     const product = useLoaderData();
   const [loading, setLoading] = useState();
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const email = user?.email;
   const {
     register,
     formState: { errors },
@@ -21,13 +21,15 @@ const EditProduct = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/users?email=${email}`)
+    if(user?.email){
+      fetch(`http://localhost:5000/users?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSeller(data);
-        setLoading(false);
       });
-  }, [email]);
+    }
+      setLoading(false);
+  }, [user?.email]);
 
 
   const handleEditProduct = (data) => {
@@ -91,6 +93,7 @@ const EditProduct = () => {
               console.log(data)
               if(data.acknowledged){
                 toast.success('Your car information has been updated')
+                navigate('/dashboard/myProducts')
               }
               setLoading(false)
               reset()

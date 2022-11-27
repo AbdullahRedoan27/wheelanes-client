@@ -7,6 +7,7 @@ import ProductCard from "../../../Components/ProductCard/ProductCard";
 
 const Products = () => {
     const products = useLoaderData()
+    console.log(products);
   const [loading, setLoading] = useState(true)
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],

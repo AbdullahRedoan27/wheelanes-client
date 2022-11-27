@@ -9,15 +9,17 @@ const ProductDetails = () => {
   const { user } = useContext(AuthContext);
   const [reporter, setReporter] = useState(null);
   const [loading, setLoading] = useState(false);
-  const email = user?.email;
+  // const email = user?.email;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users?email=${email}`)
+    if(user?.email){
+      fetch(`http://localhost:5000/users?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setReporter(data);
       });
-  }, [email]);
+    }
+  }, [user]);
 
   const handleReport = () => {
     const proceed = window.confirm(

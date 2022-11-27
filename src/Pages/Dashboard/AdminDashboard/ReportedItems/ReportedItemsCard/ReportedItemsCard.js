@@ -28,38 +28,10 @@ const ReportedItemsCard = ({ item, setRefetch }) => {
           setLoading(false);
         });
     }
-  };
-
-  const handleRemove = (id) => {
-    const proceed = window.confirm(
-      "Confirm remove from reported items? It will still be on the products Page"
-    );
-    setLoading(true);
-    if (proceed) {
-      fetch(`http://localhost:5000/dashboard/removeitem?id=${id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-          if (data?.acknowledged) {
-            toast.success(
-              "Successfully Removed The Product From Reported Products Page"
-            );
-            setRefetch(true);
-            setLoading(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-        });
+    else{
+        setLoading(false)
     }
   };
-
-  if (loading) {
-    return <Loading></Loading>;
-  }
 
   return (
     <tr className="">
@@ -104,14 +76,6 @@ const ReportedItemsCard = ({ item, setRefetch }) => {
           className="btn btn-error flex w-16 justify-center mx-auto btn-xs"
         >
           Delete
-        </Link>
-      </th>
-      <th className="p-0">
-        <Link
-          onClick={() => handleRemove(item?._id)}
-          className="btn btn-warning flex w-16 justify-center mx-auto btn-xs"
-        >
-          Remove
         </Link>
       </th>
     </tr>
