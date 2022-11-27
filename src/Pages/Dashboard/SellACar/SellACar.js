@@ -21,13 +21,15 @@ const SellACar = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/users?email=${email}`)
+    if(user?.email){
+      fetch(`http://localhost:5000/users?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
         setSeller(data);
-        setLoading(false);
       });
-  }, [email]);
+    }
+      setLoading(false);
+  }, [user, email]);
 
 
   const handleSellACar = (data) => {
@@ -142,7 +144,7 @@ const SellACar = () => {
             className="select select-bordered w-full"
           >
             <option>Sedan</option>
-            <option>Off road</option>
+            <option>Off Road</option>
             <option>Muscle</option>
             <option>SUV</option>
           </select>

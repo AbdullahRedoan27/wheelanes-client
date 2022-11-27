@@ -4,7 +4,6 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
   return (
     <tr className="">
       <td className="p-0">

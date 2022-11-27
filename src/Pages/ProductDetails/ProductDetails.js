@@ -3,12 +3,14 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link, useLoaderData } from "react-router-dom";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
+import ContactModal from "../ContactModal/ContactModal";
 
 const ProductDetails = () => {
   const product = useLoaderData();
   const { user } = useContext(AuthContext);
   const [reporter, setReporter] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [contact, setContact] = useState(false);
   // const email = user?.email;
 
   useEffect(() => {
@@ -52,6 +54,10 @@ const ProductDetails = () => {
         });
     }
   };
+
+  const handleContact = (data) => {
+    
+  }
 
   return (
     <div className="w-11/12 mx-auto">
@@ -114,15 +120,17 @@ const ProductDetails = () => {
       </div>
       {user?.uid ? 
         <>
-          <Link className="btn btn-primary mx-auto mt-4 mr-4">
-            Contact Seller
-          </Link>
-          <Link onClick={handleReport} className="btn btn-error mx-auto mt-4 ">
-            Report Product
-          </Link>
+        <label onClick={() => setContact(product)} htmlFor="contactModal" className="btn btn-primary mx-auto mt-4 mr-4">Contact Seller</label>
+        <Link className="btn btn-error ml-4" onClick={handleReport}>Report To Admin</Link>
         </>
         :
         <p className="text-warning">Please log in to contact the seller.</p>
+      }
+      {
+        contact &&
+        <ContactModal
+          product={product}
+        ></ContactModal>
       }
     </div>
   );

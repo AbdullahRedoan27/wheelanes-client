@@ -10,7 +10,7 @@ import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ProductDetails from "../../Pages/ProductDetails/ProductDetails";
 import EditProduct from "../../Pages/EditProduct/EditProduct";
 import Products from "../../Pages/Products/Products/Products";
-import Categories from "../../Pages/Categories/Categories";
+import Categories from "../../Pages/Products/Categories/Categories";
 import AllProducts from "../../Pages/Products/AllProducts/AllProducts";
 import AllUsers from "../../Pages/Dashboard/AdminDashboard/AllUsers/AllUsers";
 import AllSeller from "../../Pages/Dashboard/AdminDashboard/AllSeller/AllSeller";

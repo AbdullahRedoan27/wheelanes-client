@@ -148,7 +148,7 @@ const Navbar = () => {
               <img
                 src={user?.photoURL}
                 alt=""
-                className="border border-gray-400 w-10 rounded-full mr-4"
+                className="border border-gray-300 w-14 mask mask-hexagon mr-4"
               ></img>
               <Link onClick={handleLogOut} className="btn">
                 Log Out

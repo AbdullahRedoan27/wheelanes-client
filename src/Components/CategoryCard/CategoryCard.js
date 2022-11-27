@@ -7,7 +7,7 @@ const CategoryCard = ({category}) => {
       <div className="card bg-base-300 my-4 py-5 w-56 shadow-xl">
       <img
             src={category?.categoryImg}
-            alt="sedan car"
+            alt={category?.category}
             className="rounded-xl w-3/5 mx-auto m-3"
           />
         <div className="card-body items-center text-center p-2">
