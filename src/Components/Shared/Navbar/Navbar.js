@@ -65,7 +65,7 @@ const Navbar = () => {
                 {userData?.role === "Buyer/User" && (
                   <>
                     <li>
-                      <Link to="/dashboard/myProducts">My Orders</Link>
+                      <Link to="/dashboard/myorders">My Orders</Link>
                     </li>
                     <li>
                       <Link to="/dashboard/myProducts">My Wishlist</Link>

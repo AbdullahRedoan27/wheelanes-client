@@ -39,7 +39,7 @@ const ContactModal = ({ product }) => {
     .then(data => {
       console.log(data)
       if(data.acknowledged){
-        toast.success('Successfully Booked')
+        toast.success('Order placed successfully')
         reset();
       }
       else{
