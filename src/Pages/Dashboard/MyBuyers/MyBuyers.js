@@ -32,7 +32,7 @@ const MyBuyers = () => {
           </thead>
           <tbody>
             {buyers?.map((buyer) => (
-              <tr>
+              <tr key={buyer?._id}>
                 <td>
                   <div>
                     <div className="font-bold">{buyer?.buyerName}</div>
@@ -63,7 +63,7 @@ const MyBuyers = () => {
                   </label>
                 </th>
                 {contactDetails && (
-                  <BuyerContactModal buyer={buyer}></BuyerContactModal>
+                  <BuyerContactModal key={buyer?._id} buyer={buyer}></BuyerContactModal>
                 )}
               </tr>
             ))}
