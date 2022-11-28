@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link, useLoaderData } from "react-router-dom";
-import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 import ContactModal from "../ContactModal/ContactModal";
 
@@ -11,7 +10,6 @@ const ProductDetails = () => {
   const [reporter, setReporter] = useState(null);
   const [loading, setLoading] = useState(false);
   const [contact, setContact] = useState(false);
-  // const email = user?.email;
 
   useEffect(() => {
     if(user?.email){
@@ -54,11 +52,6 @@ const ProductDetails = () => {
         });
     }
   };
-
-  const handleContact = (data) => {
-    
-  }
-
   return (
     <div className="w-11/12 mx-auto">
       <div>

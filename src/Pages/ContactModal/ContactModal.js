@@ -14,7 +14,7 @@ const ContactModal = ({ product }) => {
   const userEmail = user?.email;
   const sellerEmail = product?.sellerEmail;
   const sellerLocation = product?.location;
-
+  
   const handleSubmitModal = (data) => {
     const buyerName = data.userName;
     const buyerEmail = data.userEmail;
