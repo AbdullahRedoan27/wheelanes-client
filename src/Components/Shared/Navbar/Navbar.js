@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 import axios from "axios";
+import logo from '../../../images/logo.png';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -134,6 +135,7 @@ const Navbar = () => {
             to="/"
             className="btn btn-ghost normal-case text-white text-2xl"
           >
+            <img className="w-10 mr-3 hidden lg:flex md:flex" src={logo} alt=""></img>
             Wheelanes
           </Link>
         </div>
