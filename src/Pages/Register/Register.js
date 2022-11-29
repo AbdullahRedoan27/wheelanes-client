@@ -1,12 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import useToken from '../../Hooks/useToken';
 
 const Register = () => {
     const {createUser, updateUserProfile} = useContext(AuthContext)
     const { register, formState:{errors}, handleSubmit, reset } = useForm();
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail);
+    const navigate = useNavigate();
+
+    if (token) {
+      // navigate(from, { replace: true });
+  }
 
     const handleRegister = data => {
         const name = data.name;
@@ -19,7 +27,8 @@ const Register = () => {
             const user = res.user;
             console.log(user);
             toast.success('Successfully Registered')
-            reset()
+            setCreatedUserEmail(email);
+            reset();
         })
         .catch(err => {
             console.error(err)

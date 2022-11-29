@@ -31,6 +31,7 @@ const AllUsers = () => {
               <th>Name</th>
               <th>User Type</th>
               <th>Make Admin</th>
+              <th></th>
               <th>Delete User</th>
             </tr>
           </thead>

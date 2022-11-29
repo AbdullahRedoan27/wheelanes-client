@@ -3,47 +3,57 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
-import {GoogleAuthProvider} from 'firebase/auth';
+import { GoogleAuthProvider } from "firebase/auth";
 import Loading from "../../Components/Loading/Loading";
+import useToken from "../../Hooks/useToken";
 
 const Login = () => {
-  const [loading, setLoading] = useState(false)
-    const {googleSignIn } = useContext(AuthContext);
-    const { register, formState:{errors}, handleSubmit } = useForm();
-    const {signIn} = useContext(AuthContext);
-    const navigate = useNavigate();
+  const [loginUserEmail, setLoginUserEmail] = useState('');
+  const [token] = useToken(loginUserEmail);
+  const [loading, setLoading] = useState(false);
+  const { googleSignIn } = useContext(AuthContext);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    const handleSignIn = data => {
-        const email = data.email;
-        const password = data.password;
-        setLoading(true);
-        signIn(email, password)
-        .then(res => {
-            const user = res.user;
-            setLoading(false)
-            toast.success('Logged In Successfully')
-            navigate('/')
-        })
-        .catch(err =>{
-            console.error(err);
-            setLoading(false)
-            toast.error(err.message);
-        });
-    }
+  if (token) {
+    // navigate(form, { replace: true });
+  }
 
-    const googleProvider = new GoogleAuthProvider()
+  const handleSignIn = (data) => {
+    const email = data.email;
+    const password = data.password;
+    setLoading(true);
+    signIn(email, password)
+      .then((res) => {
+        const user = res.user;
+        setLoading(false);
+        toast.success("Logged In Successfully");
+        setLoginUserEmail(user?.email);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        toast.error(err.message);
+      });
+  };
 
-    const handleGoogleSignIn = () => {
-        googleSignIn(googleProvider)
-        .then(res => {
-            const user = res.user;
-            console.log(user);
-        })
-    }
+  const googleProvider = new GoogleAuthProvider();
 
-    if(loading){
-      return <Loading></Loading>
-    }
+  const handleGoogleSignIn = () => {
+    googleSignIn(googleProvider).then((res) => {
+      const user = res.user;
+      console.log(user);
+    });
+  };
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="h-[500px] mt-10 flex justify-center items-center">
@@ -103,7 +113,10 @@ const Login = () => {
           </Link>
         </small>
         <div className="divider">or</div>
-        <button onClick={handleGoogleSignIn} className="btn btn-neutral btn-sm mx-auto w-full">
+        <button
+          onClick={handleGoogleSignIn}
+          className="btn btn-neutral btn-sm mx-auto w-full"
+        >
           Continue With Google
         </button>
       </div>

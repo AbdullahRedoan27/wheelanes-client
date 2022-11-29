@@ -2,6 +2,7 @@ import React from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from "react-router-dom";
+import {MdVerified} from 'react-icons/md';
 
 const ProductCard = ({ product }) => {
   return (
@@ -24,7 +25,10 @@ const ProductCard = ({ product }) => {
         </div>
       </td>
       <td className="p-0 py-4">
-        <img src={product?.sellerImage} className="w-8 ml-5 rounded-full" alt=""></img>{product?.sellername}
+        <span className="flex m-0 items-center gap-2"><img src={product?.sellerImage} className="w-8 ml-5 rounded-full" alt=""></img>{product?.sellername} 
+        {product?.sellerVerified === true &&
+          <MdVerified></MdVerified>
+        }</span>
         <br />
         <span className="badge badge-ghost badge-sm">
           {product?.sellerEmail}

@@ -78,9 +78,9 @@ const UserCard = ({user, btnName, setRefetch}) => {
         <th>
           <button disabled={user?.role === "Admin"} onClick={()=>handleMakeAdmin(user?._id)} className="btn btn-warning btn-xs">Make Admin</button>
         </th>
-        { 
+        { user?.role === "Seller" &&
         <th>
-          <button disabled={user?.role !== "Seller"} onClick={()=>handleVerify(user?._id)} className="btn btn-warning btn-xs">Verify Seller</button>
+          <button disabled={user?.role !== "Seller" || user?.verified === true} onClick={()=>handleVerify(user?._id)} className="btn btn-warning btn-xs">Verify Seller</button>
         </th>
         }
         <th>

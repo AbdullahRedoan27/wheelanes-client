@@ -19,6 +19,8 @@ import NotFoundPage from "../../Pages/NotFoundPage/NotFoundPage";
 import ReportedItems from "../../Pages/Dashboard/AdminDashboard/ReportedItems/ReportedItems";
 import MyBuyers from "../../Pages/Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -59,25 +61,41 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
-      },
-      {
-        path: "/dashboard/sellCar",
-        element: <SellACar></SellACar>,
-      },
-      {
-        path: "/dashboard/myProducts",
-        element: <MyProducts></MyProducts>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       },
       {
         path: "/dashboard/productDetails/:id",
         element: <ProductDetails></ProductDetails>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/dashboard/productDetails/${params.id}`),
+      },
+      {
+        path: "/dashboard/alluser",
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+      },
+      {
+        path: "/dashboard/allseller",
+        element: <AdminRoute><AllSeller></AllSeller></AdminRoute>
+      },
+      {
+        path: "/dashboard/allbuyer",
+        element: <AdminRoute><AllBuyer></AllBuyer></AdminRoute>
+      },
+      {
+        path:'/dashboard/reportedItems',
+        element:<AdminRoute><ReportedItems></ReportedItems></AdminRoute>
+      },
+      {
+        path:'/dashboard/mybuyers',
+        element:<MyBuyers></MyBuyers>
+      },
+      {
+        path:'/dashboard/myorders',
+        element:<MyOrders></MyOrders>
       },
       {
         path: "/dashboard/productDetails/editProduct/:id",
@@ -88,31 +106,15 @@ const router = createBrowserRouter([
           ),
       },
       {
-        path: "/dashboard/alluser",
-        element: <AllUsers></AllUsers>,
+        path: "/dashboard/sellCar",
+        element: <SellACar></SellACar>
       },
       {
-        path: "/dashboard/allseller",
-        element: <AllSeller></AllSeller>,
-      },
-      {
-        path: "/dashboard/allbuyer",
-        element: <AllBuyer></AllBuyer>,
-      },
-      {
-        path:'/dashboard/reportedItems',
-        element:<ReportedItems></ReportedItems>
-      },
-      {
-        path:'/dashboard/mybuyers',
-        element:<MyBuyers></MyBuyers>
-      },
-      {
-        path:'/dashboard/myorders',
-        element:<MyOrders></MyOrders>
+        path: "/dashboard/myProducts",
+        element: <MyProducts></MyProducts>
       }
-    ],
-  },
+    ]
+  }
 ]);
 
 export default router;

@@ -31,7 +31,6 @@ const EditProduct = () => {
       setLoading(false);
   }, [user?.email]);
 
-
   const handleEditProduct = (data) => {
     setLoading(true)
     const sellername = seller?.name;
@@ -403,7 +402,7 @@ const EditProduct = () => {
         </div>
         <input
           type="submit"
-          value="Submit"
+          value="Update"
           className="btn btn-accent mt-4 mx-auto w-full"
         />
       </form>
