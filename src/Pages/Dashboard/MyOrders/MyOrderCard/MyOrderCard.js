@@ -11,7 +11,11 @@ const MyOrderCard = ({ order, refetch }) => {
         console.log(id);
         if(proceed){
             fetch(`http://localhost:5000/dashboard/deleteorder/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+              'content-type': 'application/json', 
+              authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+          }
         })
         .then(res => res.json())
         .then(data => {

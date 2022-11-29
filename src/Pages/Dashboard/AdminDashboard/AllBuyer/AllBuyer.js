@@ -1,30 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import UserCard from '../UserCard/UserCard';
-import Loading from '../../../../Components/Loading/Loading';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import UserCard from "../UserCard/UserCard";
+import Loading from "../../../../Components/Loading/Loading";
 
 const AllBuyer = () => {
-    const [reFetch, setRefetch] = useState(false);
-    const [sellers, setSellerss] = useState([]);
-    const [loading, setLoading] = useState(true)
+  const [reFetch, setRefetch] = useState(false);
+  const [sellers, setSellerss] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        setLoading(true)
-      axios
-        .get("http://localhost:5000/allbuyer")
-        .then((res) => {
-            setSellerss(res.data)
-            setLoading(false)
-        });
-    }, [reFetch]);
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get("http://localhost:5000/allbuyer", {
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("wheelanesToken")}`
+        }
+      })
+      .then((res) => {
+        setSellerss(res.data);
+        setLoading(false);
+      });
+  }, [reFetch]);
 
-    if(loading){
-        return <Loading></Loading>
-      }
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
-    return (
-        <div>
-            <div className="overflow-x-auto w-full">
+  return (
+    <div>
+      <div className="overflow-x-auto w-full">
         <table className="table w-11/12 mx-auto">
           <thead>
             <tr>
@@ -36,16 +41,18 @@ const AllBuyer = () => {
           </thead>
           <tbody>
             {sellers.map((user) => (
-              <UserCard key={user?._id} user={user}
-              btnName={"Buyer"}
-              setRefetch={setRefetch}
+              <UserCard
+                key={user?._id}
+                user={user}
+                btnName={"Buyer"}
+                setRefetch={setRefetch}
               ></UserCard>
             ))}
           </tbody>
         </table>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default AllBuyer;

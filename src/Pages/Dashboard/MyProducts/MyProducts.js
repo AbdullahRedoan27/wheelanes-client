@@ -1,22 +1,30 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../Context/AuthProvider';
-import MyProductCard from '../MyProductCard/MyProductCard';
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../Context/AuthProvider";
+import MyProductCard from "../MyProductCard/MyProductCard";
 
 const MyProducts = () => {
-    const {user} = useContext(AuthContext);
-    const {data: products = [], refetch} = useQuery({
-        queryKey:["products", user?.email],
-        queryFn: async() => {
-            const res = await fetch(`http://localhost:5000/dashboard/myProducts?email=${user?.email}`)
-            const data = res.json();
-            return data;
+  const { user } = useContext(AuthContext);
+  const { data: products = [], refetch } = useQuery({
+    queryKey: ["products", user?.email],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/dashboard/myProducts?email=${user?.email}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("wheelanesToken")}`,
+          },
         }
-    })
+      );
+      const data = res.json();
+      return data;
+    },
+  });
 
-    return (
-        <div className='w-11/12 mx-auto'>
-        <div className="overflow-x-auto w-full">
+  return (
+    <div className="w-11/12 mx-auto">
+      <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
             <tr>
@@ -31,18 +39,18 @@ const MyProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {
-                products.map(product => <MyProductCard
-                    key={product?._id}
-                    product={product}
-                    refetch={refetch}
-                ></MyProductCard>)
-            }
+            {products.map((product) => (
+              <MyProductCard
+                key={product?._id}
+                product={product}
+                refetch={refetch}
+              ></MyProductCard>
+            ))}
           </tbody>
         </table>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default MyProducts;

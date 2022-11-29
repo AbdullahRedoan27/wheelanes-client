@@ -6,7 +6,7 @@ import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const EditProduct = () => {
-    const product = useLoaderData();
+  const product = useLoaderData();
   const [loading, setLoading] = useState();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
@@ -14,25 +14,30 @@ const EditProduct = () => {
     register,
     formState: { errors },
     handleSubmit,
-    reset
+    reset,
   } = useForm();
   const [usingPeriod, setUsingPeriod] = useState();
   const [seller, setSeller] = useState(null);
 
   useEffect(() => {
     setLoading(true);
-    if(user?.email){
-      fetch(`http://localhost:5000/users?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSeller(data);
-      });
+    if (user?.email) {
+      fetch(`http://localhost:5000/users?email=${user?.email}`, {
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("wheelanesToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setSeller(data);
+        });
     }
-      setLoading(false);
+    setLoading(false);
   }, [user?.email]);
 
   const handleEditProduct = (data) => {
-    setLoading(true)
+    setLoading(true);
     const sellername = seller?.name;
     const sellerEmail = seller?.email;
     const sellerImage = seller?.photo;
@@ -89,17 +94,17 @@ const EditProduct = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data)
-              if(data.acknowledged){
-                toast.success('Your car information has been updated')
-                navigate('/dashboard/myProducts')
+              console.log(data);
+              if (data.acknowledged) {
+                toast.success("Your car information has been updated");
+                navigate("/dashboard/myProducts");
               }
-              setLoading(false)
-              reset()
+              setLoading(false);
+              reset();
             });
-          }
-        });
-      };
+        }
+      });
+  };
 
   const handleUsingPeriod = (event) => {
     const selectedValue = event.target.value;

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import Loading from "../../Components/Loading/Loading";
@@ -12,6 +12,10 @@ const Login = () => {
   const [token] = useToken(loginUserEmail);
   const [loading, setLoading] = useState(false);
   const { googleSignIn } = useContext(AuthContext);
+  const location = useLocation()
+
+  const from = location?.state?.from?.pathname || '/';
+
   const {
     register,
     formState: { errors },
@@ -21,7 +25,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   if (token) {
-    // navigate(form, { replace: true });
+    navigate(from, { replace: true });
   }
 
   const handleSignIn = (data) => {

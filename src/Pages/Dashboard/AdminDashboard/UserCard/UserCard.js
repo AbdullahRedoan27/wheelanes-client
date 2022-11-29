@@ -8,7 +8,11 @@ const UserCard = ({user, btnName, setRefetch}) => {
         const proceed = window.confirm(`Are you sure you want to delete this ${btnName}?`)
         if(proceed){
             fetch(`http://localhost:5000/deleteuser?id=${id}`, {
-                method:'DELETE'
+                method:'DELETE',
+                headers: {
+                  'content-type': 'application/json', 
+                  authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+              }
             })
             .then(res => res.json())
             .then(data => {
@@ -25,7 +29,11 @@ const UserCard = ({user, btnName, setRefetch}) => {
         const proceed = window.confirm(`Are you sure to make ${btnName} an admin?`)
         if(proceed){
             fetch(`http://localhost:5000/makeadmin?id=${id}`, {
-                method:'put'
+                method:'put',
+                headers: {
+                  'content-type': 'application/json', 
+                  authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+              }
             })
             .then(res => res.json())
             .then(data => {
@@ -42,7 +50,11 @@ const UserCard = ({user, btnName, setRefetch}) => {
         const proceed = window.confirm(`Are you sure verify the seller?`)
         if(proceed){
             fetch(`http://localhost:5000/verify?id=${id}`, {
-                method:'put'
+                method:'put',
+                headers: {
+                  'content-type': 'application/json', 
+                  authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+              }
             })
             .then(res => res.json())
             .then(data => {

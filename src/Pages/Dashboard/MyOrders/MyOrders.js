@@ -8,7 +8,12 @@ const MyOrders = () => {
     const {data: orders = [], refetch} = useQuery({
         queryKey:["orders", user?.email],
         queryFn: async() => {
-            const res = await fetch(`http://localhost:5000/dashboard/myorders?email=${user?.email}`)
+            const res = await fetch(`http://localhost:5000/dashboard/myorders?email=${user?.email}`,{
+                headers: {
+                  'content-type': 'application/json', 
+                  authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+              }
+            })
             const data = res.json();
             return data;
         }

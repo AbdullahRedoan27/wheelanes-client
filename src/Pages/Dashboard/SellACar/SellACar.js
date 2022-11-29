@@ -85,6 +85,7 @@ const SellACar = () => {
             method: "POST",
             headers: {
               "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
             },
             body: JSON.stringify(car),
           })

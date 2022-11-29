@@ -10,7 +10,12 @@ const MyBuyers = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/mybuyers?email=${user?.email}`)
+        .get(`http://localhost:5000/mybuyers?email=${user?.email}`, {
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("wheelanesToken")}`
+          }
+        })
         .then(function (response) {
           setBuyers(response.data);
         });
@@ -19,60 +24,64 @@ const MyBuyers = () => {
 
   return (
     <div>
-      {
-        buyers?.length > 0 ? 
+      {buyers?.length > 0 ? (
         <div className="overflow-x-auto w-full">
-        <table className="table w-11/12 mx-auto">
-          <thead>
-            <tr>
-              <th>Buyer Name</th>
-              <th>Ordered Product</th>
-              <th>Contact</th>
-            </tr>
-          </thead>
-          <tbody>
-            {buyers?.map((buyer) => (
-              <tr key={buyer?._id}>
-                <td>
-                  <div>
-                    <div className="font-bold">{buyer?.buyerName}</div>
-                    <div className="text-sm opacity-50">
-                      {buyer?.buyerEmail}
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <span className="flex">
-                    <img
-                      className="mask mask-squircle w-12 m-0"
-                      src={buyer?.image}
-                      alt=""
-                    ></img>{" "}
-                    {buyer?.carName}
-                  </span>
-                  <br />
-                  Category: {buyer?.category}
-                </td>
-                <th>
-                  <label
-                    onClick={() => setContactDetails(buyer?._id)}
-                    htmlFor="buyerContactModal"
-                    className="btn btn-primary btn-xs"
-                  >
-                    Contact Buyer
-                  </label>
-                </th>
-                {contactDetails && (
-                  <BuyerContactModal key={buyer?._id} buyer={buyer}></BuyerContactModal>
-                )}
+          <table className="table w-11/12 mx-auto">
+            <thead>
+              <tr>
+                <th>Buyer Name</th>
+                <th>Ordered Product</th>
+                <th>Contact</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-        :
-        <p className="text-center text-xl">Sorry, No one have ordered your product.</p>
-      }
+            </thead>
+            <tbody>
+              {buyers?.map((buyer) => (
+                <tr key={buyer?._id}>
+                  <td>
+                    <div>
+                      <div className="font-bold">{buyer?.buyerName}</div>
+                      <div className="text-sm opacity-50">
+                        {buyer?.buyerEmail}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span className="flex">
+                      <img
+                        className="mask mask-squircle w-12 m-0"
+                        src={buyer?.image}
+                        alt=""
+                      ></img>{" "}
+                      {buyer?.carName}
+                    </span>
+                    <br />
+                    Category: {buyer?.category}
+                  </td>
+                  <th>
+                    <label
+                      onClick={() => setContactDetails(buyer?._id)}
+                      htmlFor="buyerContactModal"
+                      className="btn btn-primary btn-xs"
+                    >
+                      Contact Buyer
+                    </label>
+                  </th>
+                  {contactDetails && (
+                    <BuyerContactModal
+                      key={buyer?._id}
+                      buyer={buyer}
+                    ></BuyerContactModal>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p className="text-center text-xl">
+          Sorry, No one have ordered your product.
+        </p>
+      )}
     </div>
   );
 };

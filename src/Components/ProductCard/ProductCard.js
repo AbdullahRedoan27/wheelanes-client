@@ -6,7 +6,7 @@ import {MdVerified} from 'react-icons/md';
 
 const ProductCard = ({ product }) => {
   return (
-    <tr className="">
+    <tr className="my-3">
       <td className="p-0">
         <div className="flex items-center space-x-3">
           <div className="avatar">
@@ -24,8 +24,8 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </td>
-      <td className="p-0 py-4">
-        <span className="flex m-0 items-center gap-2"><img src={product?.sellerImage} className="w-8 ml-5 rounded-full" alt=""></img>{product?.sellername} 
+      <td className="p-0 py-5">
+        <span className="flex m-0 items-center"><img src={product?.sellerImage} className="w-6 ml-5 rounded-full" alt=""></img>{product?.sellername} 
         {product?.sellerVerified === true &&
           <MdVerified></MdVerified>
         }</span>

@@ -11,7 +11,11 @@ const MyProductCard = ({ product, refetch }) => {
         console.log(id);
         if(proceed){
             fetch(`http://localhost:5000/changeStatus?id=${id}`, {
-                method:'PUT', 
+                method:'PUT',
+                headers: {
+                  'content-type': 'application/json', 
+                  authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+              }
             })
             .then(data => console.log(data))
             .catch(err => console.error(err))
@@ -23,7 +27,11 @@ const MyProductCard = ({ product, refetch }) => {
         console.log(id);
         if(proceed){
             fetch(`http://localhost:5000/deleteProduct?id=${id}`, {
-                method:'DELETE', 
+                method:'DELETE',
+                headers: {
+                  'content-type': 'application/json', 
+                  authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+              }
             })
             .then(data => console.log(data))
             .catch(err => console.error(err))
@@ -31,9 +39,12 @@ const MyProductCard = ({ product, refetch }) => {
   }
 
   const handleAdvertise = id => {
-    console.log(id);
     fetch(`http://localhost:5000/advertiseproduct/${id}`, {
       method: 'PATCH',
+      headers: {
+        'content-type': 'application/json', 
+        authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+    }
     })
     .then(res => res.json())
     .then(data => {

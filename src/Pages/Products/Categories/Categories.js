@@ -22,7 +22,7 @@ const Categories = () => {
       }
 
     return (
-            <div className='grid lg:grid-cols-4 items-center lg:h-screen w-11/12 mx-auto'>
+            <div className='grid lg:grid-cols-4 items-center gap-3 lg:h-screen w-11/12 mx-auto'>
             {
                 categories?.map(category => <CategoryCard
                     key={category._id}

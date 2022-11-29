@@ -11,7 +11,12 @@ const AllSeller = () => {
     useEffect(() => {
         setLoading(true)
       axios
-        .get("http://localhost:5000/allseller")
+        .get("http://localhost:5000/allseller", {
+          headers: {
+            'content-type': 'application/json', 
+            authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+          }
+        })
         .then((res) => {
             setSellerss(res.data)
             setLoading(false)

@@ -11,7 +11,12 @@ const AllUsers = () => {
   useEffect(() => {
     setLoading(true)
     axios
-      .get("http://localhost:5000/alluser")
+      .get("http://localhost:5000/alluser", {
+        headers: {
+          'content-type': 'application/json', 
+          authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
+      }
+      })
       .then((res) => {
         setUsers(res.data)
         setLoading(false)
