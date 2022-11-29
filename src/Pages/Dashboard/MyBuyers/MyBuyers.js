@@ -6,14 +6,12 @@ const MyBuyers = () => {
   const { user } = useContext(AuthContext);
   const [buyers, setBuyers] = useState([]);
   const [contactDetails, setContactDetails] = useState();
-  console.log(contactDetails);
 
   useEffect(() => {
     if (user?.email) {
       axios
         .get(`http://localhost:5000/mybuyers?email=${user?.email}`)
         .then(function (response) {
-          console.log(response);
           setBuyers(response.data);
         });
     }
@@ -21,7 +19,9 @@ const MyBuyers = () => {
 
   return (
     <div>
-      <div className="overflow-x-auto w-full">
+      {
+        buyers?.length > 0 ? 
+        <div className="overflow-x-auto w-full">
         <table className="table w-11/12 mx-auto">
           <thead>
             <tr>
@@ -70,6 +70,9 @@ const MyBuyers = () => {
           </tbody>
         </table>
       </div>
+        :
+        <p className="text-center text-xl">Sorry, No one have ordered your product.</p>
+      }
     </div>
   );
 };

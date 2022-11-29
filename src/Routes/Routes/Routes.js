@@ -21,6 +21,8 @@ import MyBuyers from "../../Pages/Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
+import Blogs from "../../Pages/Blogs/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path:'/blogs',
+        element:<Blogs></Blogs>
       },
       {
         path: "/login",
@@ -56,7 +62,7 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <NotFoundPage></NotFoundPage>,
-      },
+      }
     ],
   },
   {
@@ -91,15 +97,15 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard/mybuyers',
-        element:<MyBuyers></MyBuyers>
+        element:<SellerRoute><MyBuyers></MyBuyers></SellerRoute>
       },
       {
         path:'/dashboard/myorders',
-        element:<MyOrders></MyOrders>
+        element:<PrivateRoute><MyOrders></MyOrders></PrivateRoute>
       },
       {
         path: "/dashboard/productDetails/editProduct/:id",
-        element: <EditProduct></EditProduct>,
+        element: <SellerRoute><EditProduct></EditProduct></SellerRoute>,
         loader: ({ params }) =>
           fetch(
             `http://localhost:5000/dashboard/productDetails/editProduct/${params.id}`
@@ -107,11 +113,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/sellCar",
-        element: <SellACar></SellACar>
+        element: <SellerRoute><SellACar></SellACar></SellerRoute>
       },
       {
         path: "/dashboard/myProducts",
-        element: <MyProducts></MyProducts>
+        element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
       }
     ]
   }

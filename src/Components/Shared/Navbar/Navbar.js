@@ -28,7 +28,7 @@ const Navbar = () => {
         <Link to="/products">Products</Link>
       </li>
       <li>
-        <Link>Blogs</Link>
+        <Link to="/blogs">Blogs</Link>
       </li>
       <li className="h-14 p-0 m-0">
         {user?.uid && (
@@ -99,7 +99,9 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        localStorage.clear();
+      })
       .catch((err) => console.error(err));
   };
 

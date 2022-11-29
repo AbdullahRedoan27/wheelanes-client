@@ -29,7 +29,7 @@ const Products = () => {
         <h3 className="text-lg font-semibold text-center mb-3">Categories</h3>
         <Link
           to="/products/allProducts"
-          className="btn btn-secondary w-56 mx-auto"
+          className="btn btn-secondary w-52 mx-auto"
         >
           See All Cars
         </Link>
