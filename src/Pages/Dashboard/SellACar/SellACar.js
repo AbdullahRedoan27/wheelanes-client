@@ -47,6 +47,7 @@ const SellACar = () => {
     const usingPeriodSecondaryUnit = data.usingPeriodSecondaryUnit;
     const originalPrice = data.originalPrice;
     const resalePrice = data.resalePrice;
+    const status = "Available"
 
     const image = data.image[0];
     const formData = new FormData();
@@ -77,6 +78,7 @@ const SellACar = () => {
             usingPeriodSecondaryUnit,
             originalPrice: originalPrice,
             resalePrice: resalePrice,
+            status
           };
 
           fetch("http://localhost:5000/sellCar", {
