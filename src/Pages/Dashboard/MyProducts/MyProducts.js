@@ -5,7 +5,7 @@ import MyProductCard from '../MyProductCard/MyProductCard';
 
 const MyProducts = () => {
     const {user} = useContext(AuthContext);
-    const {data: products = []} = useQuery({
+    const {data: products = [], refetch} = useQuery({
         queryKey:["products", user?.email],
         queryFn: async() => {
             const res = await fetch(`http://localhost:5000/dashboard/myProducts?email=${user?.email}`)
@@ -35,6 +35,7 @@ const MyProducts = () => {
                 products.map(product => <MyProductCard
                     key={product?._id}
                     product={product}
+                    refetch={refetch}
                 ></MyProductCard>)
             }
           </tbody>

@@ -1,9 +1,10 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from "react-router-dom";
 
-const MyProductCard = ({ product }) => {
+const MyProductCard = ({ product, refetch }) => {
 
     const handleChangeStatus = ( id ) => {
         const proceed = window.confirm('Sure? Your product will be removed from our website.')
@@ -27,6 +28,21 @@ const MyProductCard = ({ product }) => {
             .then(data => console.log(data))
             .catch(err => console.error(err))
         }
+  }
+
+  const handleAdvertise = id => {
+    console.log(id);
+    fetch(`http://localhost:5000/advertiseproduct/${id}`, {
+      method: 'PATCH',
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      if(data.acknowledged){
+        toast.success('Successfully Advertised On The Home Page')
+        refetch();
+      }
+    })
   }
 
   return (
@@ -76,7 +92,12 @@ const MyProductCard = ({ product }) => {
         </select>
       </th>
       <th className="p-0">
-        <Link to={`/dashboard/productDetails/advertise/${product?._id}`} disabled={product?.status === 'Sold'} className="btn btn-warning btn-xs">Advertise</Link>
+        <Link onClick={() => handleAdvertise(product?._id)} disabled={product?.advertise} className="btn btn-warning btn-xs">{
+          product?.advertise ?
+        "Advertised"
+      :
+          "Advertise"
+      }</Link>
       </th>
     </tr>
   );
