@@ -9,7 +9,7 @@ const Home = () => {
   const [advertisedProducts, setAdvertisedProducts] = useState([]);
     useEffect( ()=>{
         axios
-        .get('http://localhost:5000/advertisedProducts')
+        .get('https://4wheelanes-server.vercel.app/advertisedProducts')
         .then(function(response){
             setAdvertisedProducts(response?.data);
         })

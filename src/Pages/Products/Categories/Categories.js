@@ -11,9 +11,9 @@ const Categories = () => {
         queryKey: ["categories"],
         queryFn: async() => {
             setLoading(true)
-            const res = await fetch('http://localhost:5000/categories')
-            const data = res.json();
+            const res = await fetch('https://4wheelanes-server.vercel.app/categories')
             setLoading(false)
+            const data = res.json();
             return data;
         }
     })

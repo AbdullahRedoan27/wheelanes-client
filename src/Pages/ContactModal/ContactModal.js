@@ -28,7 +28,7 @@ const ContactModal = ({ product }) => {
         ...product
     }
 
-    fetch('http://localhost:5000/dashboard/addOrder',{
+    fetch('https://4wheelanes-server.vercel.app/dashboard/addOrder',{
       method:'POST',
       headers:{
         'content-type': 'application/json'

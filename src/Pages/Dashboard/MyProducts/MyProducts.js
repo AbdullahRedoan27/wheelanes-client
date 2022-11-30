@@ -9,7 +9,7 @@ const MyProducts = () => {
     queryKey: ["products", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/dashboard/myProducts?email=${user?.email}`,
+        `https://4wheelanes-server.vercel.app/dashboard/myProducts?email=${user?.email}`,
         {
           headers: {
             "content-type": "application/json",
@@ -39,7 +39,7 @@ const MyProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products?.length > 0 && products?.map((product) => (
               <MyProductCard
                 key={product?._id}
                 product={product}

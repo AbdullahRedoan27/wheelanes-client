@@ -22,7 +22,7 @@ const EditProduct = () => {
   useEffect(() => {
     setLoading(true);
     if (user?.email) {
-      fetch(`http://localhost:5000/users?email=${user?.email}`, {
+      fetch(`https://4wheelanes-server.vercel.app/users?email=${user?.email}`, {
         headers: {
           "content-type": "application/json",
           authorization: `bearer ${localStorage.getItem("wheelanesToken")}`,
@@ -31,7 +31,12 @@ const EditProduct = () => {
         .then((res) => res.json())
         .then((data) => {
           setSeller(data);
-        });
+        })
+        .catch(err => {
+          console.error(err)
+          setLoading(false)
+          toast.error('Something is wrong. Please try to log out and log in again.')
+        })
     }
     setLoading(false);
   }, [user?.email]);
@@ -85,7 +90,7 @@ const EditProduct = () => {
             resalePrice: resalePrice,
           };
 
-          fetch(`http://localhost:5000/updateCarDetails?id=${product?._id}`, {
+          fetch(`https://4wheelanes-server.vercel.app/updateCarDetails?id=${product?._id}`, {
             method: "PUT",
             headers: {
               "content-type": "application/json",
@@ -94,7 +99,6 @@ const EditProduct = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
               if (data.acknowledged) {
                 toast.success("Your car information has been updated");
                 navigate("/dashboard/myProducts");
@@ -150,7 +154,7 @@ const EditProduct = () => {
             className="select select-bordered w-full"
           >
             <option>Sedan</option>
-            <option>Off road</option>
+            <option>Off Road</option>
             <option>Muscle</option>
             <option>SUV</option>
           </select>

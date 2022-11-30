@@ -10,7 +10,7 @@ const MyOrderCard = ({ order, refetch }) => {
         const proceed = window.confirm('Are You Sure To Cancel This Order?')
         console.log(id);
         if(proceed){
-            fetch(`http://localhost:5000/dashboard/deleteorder/${id}`, {
+            fetch(`https://4wheelanes-server.vercel.app/dashboard/deleteorder/${id}`, {
             method: 'DELETE',
             headers: {
               'content-type': 'application/json', 
@@ -24,6 +24,10 @@ const MyOrderCard = ({ order, refetch }) => {
                 refetch();
                 toast.success(`Deleted successfully`)
             }
+        })
+        .catch(err => {
+          console.error(err)
+          toast.error('Something is wrong. Please try to log out and log in again.')
         })
     }
 }

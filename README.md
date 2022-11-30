@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Features of my site "Wheelanes"
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is created by React js.
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+# Email and password of Admin account:
+## Email: `abdullahredoan8@gmail.com`
+## Password: `asdfghjk`
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Details:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This is a website where one can easily sell there used cars. We collect and advertise them for sell.
 
-### `npm test`
+1. At first, after clilcking the site URL, you will see the Home route. In the Home page, there is 4 cards where the categories are shown. Below the category section, there is some advertised products. After this section, there is a section which portrays the statistics of progress of this company. And at last there is a footer.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. After clicking the 'see' button on the category card, you will be redirected to the respective route. For example, if you click on the 'Sedan' card's 'See' button, the products of 'Sedan' Category will be shown. 
 
-### `npm run build`
+3. On the Navbar, you will find 'Products' option. After clicking that, you will see all the category cards. And also there is a button called 'See all cars'. This button will redirect you to that route where you will see all the cars that is listed for sale in this website.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. After logging in, you will see an option called 'Dashboard'. If you login as a buyer, you will see 'My orders'. And if you login as a 'seller', you will see 'Sell a car', 'My buyers' and 'My products' options. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. In the blog page, you will find answers of some questions.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Here is the live link of my website:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Link: [https://wheelanes27.web.app/]

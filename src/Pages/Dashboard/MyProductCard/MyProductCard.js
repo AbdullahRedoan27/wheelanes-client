@@ -10,7 +10,7 @@ const MyProductCard = ({ product, refetch }) => {
         const proceed = window.confirm('Sure? Your product will be removed from our website.')
         console.log(id);
         if(proceed){
-            fetch(`http://localhost:5000/changeStatus?id=${id}`, {
+            fetch(`https://4wheelanes-server.vercel.app/changeStatus?id=${id}`, {
                 method:'PUT',
                 headers: {
                   'content-type': 'application/json', 
@@ -18,7 +18,10 @@ const MyProductCard = ({ product, refetch }) => {
               }
             })
             .then(data => console.log(data))
-            .catch(err => console.error(err))
+            .catch(err => {
+              console.error(err)
+              toast.error('Something is wrong. Please try to log out and log in again.')
+            })
         }
     }
 
@@ -26,7 +29,7 @@ const MyProductCard = ({ product, refetch }) => {
         const proceed = window.confirm('Sure? Your product will be removed from our website.')
         console.log(id);
         if(proceed){
-            fetch(`http://localhost:5000/deleteProduct?id=${id}`, {
+            fetch(`https://4wheelanes-server.vercel.app/deleteProduct?id=${id}`, {
                 method:'DELETE',
                 headers: {
                   'content-type': 'application/json', 
@@ -39,7 +42,7 @@ const MyProductCard = ({ product, refetch }) => {
   }
 
   const handleAdvertise = id => {
-    fetch(`http://localhost:5000/advertiseproduct/${id}`, {
+    fetch(`https://4wheelanes-server.vercel.app/advertiseproduct/${id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json', 
@@ -48,7 +51,6 @@ const MyProductCard = ({ product, refetch }) => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       if(data.acknowledged){
         toast.success('Successfully Advertised On The Home Page')
         refetch();

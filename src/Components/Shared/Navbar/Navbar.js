@@ -12,7 +12,7 @@ const Navbar = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/users?email=${user?.email}`)
+      .get(`https://4wheelanes-server.vercel.app/users?email=${user?.email}`)
       .then(function (response) {
         setUserData(response.data);
         setLoading(false);
@@ -152,7 +152,7 @@ const Navbar = () => {
               <img
                 src={user?.photoURL}
                 alt=""
-                className="border border-gray-300 w-14 mask mask-hexagon mr-4"
+                className="lg:flex hidden border border-gray-300 w-14 mask mask-hexagon mr-4"
               ></img>
               <Link onClick={handleLogOut} className="btn">
                 Log Out

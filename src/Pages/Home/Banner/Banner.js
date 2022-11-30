@@ -7,7 +7,7 @@ const Banner = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/categories").then(function (response) {
+    axios.get("https://4wheelanes-server.vercel.app/categories").then(function (response) {
       setCategories(response.data);
     });
   }, []);
@@ -22,9 +22,9 @@ const Banner = () => {
               Car
             </h1>
 
-            <div className="grid grid-cols-4 w-10/12 mx-auto">
+            <div className="lg:grid lg:grid-cols-4 grid grid-cols-2 w-10/12 mx-auto">
               {categories?.map((category) => (
-                <div>
+                <div key={category?._id}>
                   <div className="w-25 rounded-2xl p-3 h-44 mx-2 border-gray-300 border">
                     <img
                       className="w-4/6 rounded-full mx-auto"

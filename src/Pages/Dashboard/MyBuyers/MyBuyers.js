@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../Context/AuthProvider";
 import BuyerContactModal from "./BuyerContactModal/BuyerContactModal";
+import toast from "react-hot-toast";
 const MyBuyers = () => {
   const { user } = useContext(AuthContext);
   const [buyers, setBuyers] = useState([]);
@@ -10,7 +11,7 @@ const MyBuyers = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/mybuyers?email=${user?.email}`, {
+        .get(`https://4wheelanes-server.vercel.app/mybuyers?email=${user?.email}`, {
           headers: {
             "content-type": "application/json",
             authorization: `bearer ${localStorage.getItem("wheelanesToken")}`
@@ -18,7 +19,11 @@ const MyBuyers = () => {
         })
         .then(function (response) {
           setBuyers(response.data);
-        });
+        })
+        .catch(err => {
+          console.error(err)
+          toast.error('Something is wrong. Please try to log out and log in again.')
+        })
     }
   }, [user]);
 

@@ -12,7 +12,7 @@ const Products = () => {
     queryKey: ["categories"],
     queryFn: async () => {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/categories");
+      const res = await fetch("https://4wheelanes-server.vercel.app/categories");
       const data = res.json();
       setLoading(false);
       return data;
@@ -25,7 +25,7 @@ const Products = () => {
 
   return (
     <div className="grid grid-cols-5">
-      <div className="col-span-1 bg-base-100 p-4 border border-gray-700  rounded-xl">
+      <div className="lg:block hidden col-span-1 bg-base-100 p-4 border border-gray-700  rounded-xl">
         <h3 className="text-lg font-semibold text-center mb-3">Categories</h3>
         <Link
           to="/products/allProducts"
@@ -42,7 +42,7 @@ const Products = () => {
           <table className="table w-full">
             <thead>
               <tr>
-                <th>Car</th>
+                <th className="">Car</th>
                 <th>Seller</th>
                 <th>Category & Location</th>
                 <th>Status</th>

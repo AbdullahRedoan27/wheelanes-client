@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserCard from "../UserCard/UserCard";
 import Loading from "../../../../Components/Loading/Loading";
+import toast from "react-hot-toast";
 
 const AllUsers = () => {
     const [reFetch, setRefetch] = useState(false);
@@ -11,7 +12,7 @@ const AllUsers = () => {
   useEffect(() => {
     setLoading(true)
     axios
-      .get("http://localhost:5000/alluser", {
+      .get("https://4wheelanes-server.vercel.app/alluser", {
         headers: {
           'content-type': 'application/json', 
           authorization: `bearer ${localStorage.getItem('wheelanesToken')}`
@@ -20,7 +21,12 @@ const AllUsers = () => {
       .then((res) => {
         setUsers(res.data)
         setLoading(false)
-    });
+    })
+    .catch(err => {
+      console.error(err)
+      setLoading(false)
+      toast.error('Something is wrong. Please try to log out and log in again.')
+    })
   }, [reFetch]);
 
   if(loading){

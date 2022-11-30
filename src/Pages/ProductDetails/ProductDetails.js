@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if(user?.email){
-      fetch(`http://localhost:5000/users?email=${user?.email}`)
+      fetch(`https://4wheelanes-server.vercel.app/users?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setReporter(data);
@@ -35,7 +35,7 @@ const ProductDetails = () => {
 
     if (proceed) {
       setLoading(true);
-      fetch("http://localhost:5000/reportProduct", {
+      fetch("https://4wheelanes-server.vercel.app/reportProduct", {
         method: "POST",
         headers: {
           "content-type": "application/json",

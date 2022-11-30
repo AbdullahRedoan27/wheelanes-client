@@ -65,7 +65,7 @@ const Register = () => {
                 .then(() => {})
                 .catch(err => console.error(err))
 
-                fetch('http://localhost:5000/users', {
+                fetch('https://4wheelanes-server.vercel.app/users', {
                     method:'POST', 
                     headers: {
                         'content-type':'application/json'

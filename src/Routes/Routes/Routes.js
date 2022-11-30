@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         path: "/products/:category",
         element: <Products></Products>,
         loader: async ({ params }) =>
-          await fetch(`http://localhost:5000/products/${params.category}`),
+          await fetch(`https://4wheelanes-server.vercel.app/products/${params.category}`),
       },
       {
         path: "/products/allProducts",
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         path: "/dashboard/productDetails/:id",
         element: <ProductDetails></ProductDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/dashboard/productDetails/${params.id}`),
+          fetch(`https://4wheelanes-server.vercel.app/dashboard/productDetails/${params.id}`),
       },
       {
         path: "/dashboard/alluser",
@@ -108,7 +108,7 @@ const router = createBrowserRouter([
         element: <SellerRoute><EditProduct></EditProduct></SellerRoute>,
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/dashboard/productDetails/editProduct/${params.id}`
+            `https://4wheelanes-server.vercel.app/dashboard/productDetails/editProduct/${params.id}`
           ),
       },
       {

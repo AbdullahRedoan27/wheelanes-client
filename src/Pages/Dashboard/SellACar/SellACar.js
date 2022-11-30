@@ -22,7 +22,7 @@ const SellACar = () => {
   useEffect(() => {
     setLoading(true);
     if(user?.email){
-      fetch(`http://localhost:5000/users?email=${email}`)
+      fetch(`https://4wheelanes-server.vercel.app/users?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
         setSeller(data);
@@ -81,7 +81,7 @@ const SellACar = () => {
             status
           };
 
-          fetch("http://localhost:5000/sellCar", {
+          fetch("https://4wheelanes-server.vercel.app/sellCar", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -91,14 +91,18 @@ const SellACar = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data)
               if(data.acknowledged){
                 toast.success('Your car has been published for sale')
                 navigate('/dashboard/myProducts')
               }
               setLoading(false)
               reset()
-            });
+            })
+            .catch(err => {
+              console.error(err)
+              setLoading(false)
+              toast.error('Something is wrong. Please try to log out and log in again.')
+            })
           }
         });
       };

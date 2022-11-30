@@ -8,7 +8,7 @@ const AllProducts = () => {
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allProducts");
+      const res = await fetch("https://4wheelanes-server.vercel.app/allProducts");
       const data = res.json();
       return data;
     },
@@ -17,7 +17,7 @@ const AllProducts = () => {
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/categories");
+      const res = await fetch("https://4wheelanes-server.vercel.app/categories");
       const data = res.json();
       return data;
     },

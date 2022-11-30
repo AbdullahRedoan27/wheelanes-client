@@ -7,7 +7,7 @@ const UserCard = ({user, btnName, setRefetch}) => {
     const handleDeleteUser = (id) => {
         const proceed = window.confirm(`Are you sure you want to delete this ${btnName}?`)
         if(proceed){
-            fetch(`http://localhost:5000/deleteuser?id=${id}`, {
+            fetch(`https://4wheelanes-server.vercel.app/deleteuser?id=${id}`, {
                 method:'DELETE',
                 headers: {
                   'content-type': 'application/json', 
@@ -21,14 +21,17 @@ const UserCard = ({user, btnName, setRefetch}) => {
                     setRefetch(true)
                 }
             })
-            .catch(err=> console.error(err))
+            .catch(err => {
+              console.error(err)
+              toast.error('Something is wrong. Please try to log out and log in again.')
+            })
         }
     }
 
     const handleMakeAdmin = (id) =>{
         const proceed = window.confirm(`Are you sure to make ${btnName} an admin?`)
         if(proceed){
-            fetch(`http://localhost:5000/makeadmin?id=${id}`, {
+            fetch(`https://4wheelanes-server.vercel.app/makeadmin?id=${id}`, {
                 method:'put',
                 headers: {
                   'content-type': 'application/json', 
@@ -42,14 +45,17 @@ const UserCard = ({user, btnName, setRefetch}) => {
                     setRefetch(true)
                 }
             })
-            .catch(err=> console.error(err))
+            .catch(err => {
+              console.error(err)
+              toast.error('Something is wrong. Please try to log out and log in again.')
+            })
         }
     }
 
     const handleVerify = (id) => {
         const proceed = window.confirm(`Are you sure verify the seller?`)
         if(proceed){
-            fetch(`http://localhost:5000/verify?id=${id}`, {
+            fetch(`https://4wheelanes-server.vercel.app/verify?id=${id}`, {
                 method:'put',
                 headers: {
                   'content-type': 'application/json', 
@@ -63,7 +69,10 @@ const UserCard = ({user, btnName, setRefetch}) => {
                     setRefetch(true)
                 }
             })
-            .catch(err=> console.error(err))
+            .catch(err => {
+              console.error(err)
+              toast.error('Something is wrong. Please try to log out and log in again.')
+            })
         }
     }
 

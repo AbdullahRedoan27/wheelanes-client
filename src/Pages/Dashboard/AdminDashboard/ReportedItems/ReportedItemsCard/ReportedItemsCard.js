@@ -11,7 +11,7 @@ const ReportedItemsCard = ({ item, setRefetch }) => {
     const proceed = window.confirm("Confirm Delete?");
     setLoading(true);
     if (proceed) {
-      fetch(`http://localhost:5000/deleteProduct?id=${id}`, {
+      fetch(`https://4wheelanes-server.vercel.app/deleteProduct?id=${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -26,6 +26,7 @@ const ReportedItemsCard = ({ item, setRefetch }) => {
         .catch((err) => {
           console.log(err);
           setLoading(false);
+          toast.error('Something is wrong. Please try to log out and log in again.')
         });
     }
     else{

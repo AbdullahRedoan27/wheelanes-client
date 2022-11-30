@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReportedItemsCard from "./ReportedItemsCard/ReportedItemsCard";
+import toast from "react-hot-toast";
 
 const ReportedItems = () => {
   const [reportedItems, setReportedItems] = useState([]);
@@ -8,7 +9,7 @@ const ReportedItems = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/dashboard/reportedItems", {
+      .get("https://4wheelanes-server.vercel.app/dashboard/reportedItems", {
         headers: {
           "content-type": "application/json",
           authorization: `bearer ${localStorage.getItem("wheelanesToken")}`,
@@ -16,7 +17,11 @@ const ReportedItems = () => {
       })
       .then(function (response) {
         setReportedItems(response.data);
-      });
+      })
+      .catch(err => {
+        console.error(err)
+        toast.error('Something is wrong. Please try to log out and log in again.')
+      })
   }, [reFetch]);
 
   return (
