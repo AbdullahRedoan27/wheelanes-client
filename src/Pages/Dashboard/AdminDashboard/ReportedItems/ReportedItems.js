@@ -18,10 +18,12 @@ const ReportedItems = () => {
       .then(function (response) {
         setReportedItems(response.data);
       })
-      .catch(err => {
-        console.error(err)
-        toast.error('Something is wrong. Please try to log out and log in again.')
-      })
+      .catch((err) => {
+        console.error(err);
+        toast.error(
+          "Something is wrong. Please try to log out and log in again."
+        );
+      });
   }, [reFetch]);
 
   return (
@@ -31,21 +33,28 @@ const ReportedItems = () => {
           <thead>
             <tr>
               <th>Car</th>
+              <th></th>
               <th>Seller</th>
               <th>Category & Location</th>
               <th>Details</th>
               <th className="px-1">Delete From Website</th>
-              <th className="px-1">Remove From Reported Items</th>
             </tr>
           </thead>
           <tbody>
-            {reportedItems.map((item) => (
+            
+            {
+            reportedItems?.length > 0 ?
+            reportedItems.map((item) => (
               <ReportedItemsCard
                 key={item?._id}
                 item={item}
                 setRefetch={setRefetch}
               ></ReportedItemsCard>
-            ))}
+            ))
+            :
+            <tr><td className='m-3 text-center w-full'>There is no Reported Product</td></tr>
+            }
+            
           </tbody>
         </table>
       </div>

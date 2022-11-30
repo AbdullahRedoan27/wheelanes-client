@@ -27,7 +27,8 @@ const ProductDetails = () => {
     );
 
     const reportedProduct = {
-      product,
+      ...product,
+      productId : product?._id,
       reporterName: reporter?.name,
       reporterEmail: reporter?.email,
       reporterRole: reporter?.role,

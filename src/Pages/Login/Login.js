@@ -24,9 +24,9 @@ const Login = () => {
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  if (token) {
-    navigate(from, { replace: true });
-  }
+  // if (token) {
+  //   navigate(from, { replace: true });
+  // }
 
   const handleSignIn = (data) => {
     const email = data.email;

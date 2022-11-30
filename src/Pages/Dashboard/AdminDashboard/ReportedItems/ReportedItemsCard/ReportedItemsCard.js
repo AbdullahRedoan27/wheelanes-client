@@ -7,12 +7,16 @@ import Loading from "../../../../../Components/Loading/Loading";
 const ReportedItemsCard = ({ item, setRefetch }) => {
   const [loading, setLoading] = useState(false);
 
-  const handleDelete = (id ) => {
+  const handleDelete = (id) => {
     const proceed = window.confirm("Confirm Delete?");
     setLoading(true);
     if (proceed) {
-      fetch(`https://4wheelanes-server.vercel.app/deleteProduct?id=${id}`, {
+      fetch(`https://4wheelanes-server.vercel.app/deleteReportedProduct?id=${item?.productId}`, {
         method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("wheelanesToken")}`,
+        },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -26,11 +30,12 @@ const ReportedItemsCard = ({ item, setRefetch }) => {
         .catch((err) => {
           console.log(err);
           setLoading(false);
-          toast.error('Something is wrong. Please try to log out and log in again.')
+          toast.error(
+            "Something is wrong. Please try to log out and log in again."
+          );
         });
-    }
-    else{
-        setLoading(false)
+    } else {
+      setLoading(false);
     }
   };
 
